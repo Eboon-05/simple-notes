@@ -1,8 +1,8 @@
-import { LitElement, css, html } from 'lit'
+import { LitElement, html } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { connect } from 'pwa-helpers'
-import { CombinedState } from 'redux'
-import litLogo from './assets/lit.svg'
+
+// Redux
 import { State } from './redux/reducer'
 import { store } from './redux/store'
 
@@ -23,6 +23,8 @@ export class ReduxMyElement extends connect(store)(LitElement) {
         <button @click=${this._onClick} part="button">
           count is ${this.count}
         </button>
+
+        <md-editor></md-editor>
       </div>
     `
   }
