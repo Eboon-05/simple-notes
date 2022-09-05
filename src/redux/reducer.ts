@@ -1,13 +1,17 @@
 import { Reducer } from "redux"
 
-interface State {}
+export interface State {
+    text?: string,
+    count: number,
+}
 
-interface Action {
-    type: 'PING'
+export interface Action {
+    type: 'PING' | 'COUNT'
 }
 
 const initialState = {
-    text: 'Ping'
+    text: 'Ping',
+    count: 0
 }
 
 export const reducer: Reducer<State, Action> = (state = initialState, action) => {
@@ -16,6 +20,11 @@ export const reducer: Reducer<State, Action> = (state = initialState, action) =>
             return {
                 ...state,
                 text: 'Pong!'
+            }
+        case 'COUNT':
+            return {
+                ...state,
+                count: state.count + 1
             }
         default:
             return state
