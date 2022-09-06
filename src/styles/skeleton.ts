@@ -392,4 +392,11 @@ there.
 /* Larger than Desktop HD */
 @media (min-width: 1200px) {}
 
+button, button:hover, button:focus {
+    color: rgb(200, 195, 188);
+}
+
+button:focus {
+    outline: rgba(200, 200, 200, .3) 2px solid;
+}
 `
