@@ -1,7 +1,11 @@
 import { css, html, LitElement } from 'lit';
 import { customElement, query } from 'lit/decorators.js'
+
+// Styles
 import { normalize } from '../styles/normalize';
 import { skeleton } from '../styles/skeleton';
+
+import { store } from '../redux/store';
 
 @customElement('md-editor')
 export class Editor extends LitElement {
@@ -18,16 +22,19 @@ export class Editor extends LitElement {
                 grid-template-rows: 100px 1fr;
             }
 
+            #actions {
+                display: flex;
+                justify-content: flex-start;
+                align-items: flex-start
+            }
+
             textarea {
                 color: white;
                 background-color: transparent;
                 height: 100%;
                 font-family: monospace;
                 resize: none;
-            }
-
-            button, button:hover {
-                color: rgb(200, 195, 188);
+                margin: 0;
             }
         `
     ]
@@ -38,11 +45,11 @@ export class Editor extends LitElement {
     render() {
         return html`
         <div class="container u-full-width">
-            <div class="row">
+            <div id="actions" class="row">
                 <button @click=${this.erase}>Erase</button>
             </div>
             <div class="row">
-                <textarea class="u-full-width"></textarea>
+                <textarea @input=${this.input} class="u-full-width"></textarea>
             </div>
         </div>
         `
@@ -50,5 +57,12 @@ export class Editor extends LitElement {
 
     erase() {
         this.textEl.value = ''
+    }
+
+    input() {
+        store.dispatch({
+            type: 'INPUT',
+            payload: this.textEl.value
+        })
     }
 }
