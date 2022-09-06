@@ -1,10 +1,12 @@
-import { LitElement, html } from 'lit'
+import { LitElement, html, css } from 'lit'
 import { customElement } from 'lit/decorators.js'
 import { connect } from 'pwa-helpers'
 
 // Redux
 import { State } from './redux/reducer'
 import { store } from './redux/store'
+import { normalize } from './styles/normalize'
+import { skeleton } from './styles/skeleton'
 
 /**
  * An example element.
@@ -14,15 +16,26 @@ import { store } from './redux/store'
  */
 @customElement('my-element')
 export class ReduxMyElement extends connect(store)(LitElement) {
-  render() {
-    return html`
-      <md-editor></md-editor>
-    `
-  }
+    static styles = [
+        normalize,
+        skeleton,
+        css`
+            #root {
+                min-height: 100vh;
+                min-width: 100vw;
+            }
+        `
+    ]
+
+    render() {
+        return html`
+            <md-editor></md-editor>
+        `
+    }
 }
 
 declare global {
-  interface HTMLElementTagNameMap {
-    'my-element': ReduxMyElement
-  }
+    interface HTMLElementTagNameMap {
+        'my-element': ReduxMyElement
+    }
 }
