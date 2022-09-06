@@ -1,18 +1,23 @@
 import { html, LitElement } from 'lit';
-import { customElement, property } from 'lit/decorators.js'
+import { customElement, query } from 'lit/decorators.js'
 
 @customElement('md-editor')
 export class Editor extends LitElement {
-    @property({ type: String })
-    foo = 'bar'
+    @query('textarea')
+    textEl!: HTMLTextAreaElement
 
     render() {
         return html`
-            <p>${this.foo}</p>
+            <textarea></textarea>
+            <button @click=${this.erase}>Erase</button>
         `
     }
 
     firstUpdated() {
         console.log(`here`)        
+    }
+
+    erase() {
+        this.textEl.value = ''
     }
 }

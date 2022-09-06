@@ -1,5 +1,5 @@
 import { LitElement, html } from 'lit'
-import { customElement, property } from 'lit/decorators.js'
+import { customElement } from 'lit/decorators.js'
 import { connect } from 'pwa-helpers'
 
 // Redux
@@ -14,28 +14,10 @@ import { store } from './redux/store'
  */
 @customElement('my-element')
 export class ReduxMyElement extends connect(store)(LitElement) {
-  @property({ type: Number })
-  count = 0
-
   render() {
     return html`
-      <div class="card">
-        <button @click=${this._onClick} part="button">
-          count is ${this.count}
-        </button>
-
-        <md-editor></md-editor>
-      </div>
+      <md-editor></md-editor>
     `
-  }
-
-  private _onClick() {
-    store.dispatch({ type: 'COUNT' })
-  }
-
-  stateChanged (state: State) {
-    console.info(`State changed!`)
-    this.count = state.count
   }
 }
 
