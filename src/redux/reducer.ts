@@ -6,7 +6,8 @@ export interface State {
 }
 
 export interface Action {
-    type: 'PING' | 'COUNT'
+    type: 'INPUT',
+    payload?: string
 }
 
 const initialState = {
@@ -16,15 +17,10 @@ const initialState = {
 
 export const reducer: Reducer<State, Action> = (state = initialState, action) => {
     switch (action.type) {
-        case 'PING':
+        case 'INPUT':
             return {
                 ...state,
-                text: 'Pong!'
-            }
-        case 'COUNT':
-            return {
-                ...state,
-                count: state.count + 1
+                text: action.payload
             }
         default:
             return state
