@@ -366,6 +366,26 @@ hr {
   display: table;
   clear: both; }
 
+/* My styles
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+button, button:hover, button:focus {
+    color: rgb(200, 195, 188);
+}
+
+button:focus {
+    outline: rgba(200, 200, 200, .3) 2px solid;
+}
+
+textarea {
+  color: white;
+  background-color: transparent;
+  height: 100%;
+  font-family: monospace;
+  resize: none;
+  margin: 0;
+  font-size: 18px;
+}
 
 /* Media Queries
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -391,12 +411,4 @@ there.
 
 /* Larger than Desktop HD */
 @media (min-width: 1200px) {}
-
-button, button:hover, button:focus {
-    color: rgb(200, 195, 188);
-}
-
-button:focus {
-    outline: rgba(200, 200, 200, .3) 2px solid;
-}
 `

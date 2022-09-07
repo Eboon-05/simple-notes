@@ -27,15 +27,6 @@ export class Editor extends LitElement {
                 justify-content: flex-start;
                 align-items: flex-start
             }
-
-            textarea {
-                color: white;
-                background-color: transparent;
-                height: 100%;
-                font-family: monospace;
-                resize: none;
-                margin: 0;
-            }
         `
     ]
 
