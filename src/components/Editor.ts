@@ -25,9 +25,10 @@ export class Editor extends connect(store)(LitElement) {
             }
 
             #actions {
-                display: flex;
-                justify-content: flex-start;
-                align-items: flex-start
+                display: grid;
+                grid-template-columns: repeat(4, min-content);
+                grid-template-rows: repeat(2, 50%);
+                gap: 4px;
             }
 
             #writer {
@@ -39,19 +40,27 @@ export class Editor extends connect(store)(LitElement) {
     @query('textarea')
     textEl!: HTMLTextAreaElement
 
+    @query('select')
+    select!: HTMLSelectElement
+
     @property()
     disabled = true
 
     @property()
     doc: Doc | null = null
-    collection: number = 0
+    collection: Doc[] = []
 
     render() {
         return html`
         <div class="container u-full-width">
             <div id="actions" class="row">
-                <button class="button-primary" @click=${this.create}>Create document</button>
+                <button class="button-primary" @click=${this.createDoc}>Create document</button>
                 <button @click=${this.erase}>Erase</button>
+                <select @input=${this.changeDoc} class="button">
+                    ${this.collection.map(doc => {
+                        return html`<option value=${doc.name}>${doc.name}</option>`
+                    })}
+                </select>
             </div>
             <div id="writer" class="row">
                 <h1>${this.doc?.name}</h1>
@@ -69,7 +78,7 @@ export class Editor extends connect(store)(LitElement) {
         this.textEl.value = ''
     }
 
-    create() {
+    createDoc() {
         store.dispatch({
             type: 'ADD_DOC',
             payload: `Untitled${this.collection}`,
@@ -83,9 +92,15 @@ export class Editor extends connect(store)(LitElement) {
         })
     }
 
+    changeDoc() {
+        store.dispatch({
+            type: 'SET_DOC',
+            payload: this.collection.findIndex(doc => doc.name === this.select.value)
+        })
+    }
+
     firstUpdated() {
         const state = store.getState()
-        console.log(state.doc)
         
         if (state.doc) {
             this.doc = state.doc
@@ -95,7 +110,7 @@ export class Editor extends connect(store)(LitElement) {
     }
 
     stateChanged(state: State): void {
-        this.collection = state.collection.length
+        this.collection = state.collection
 
         if (state.doc) {
             if (state.doc?.name !== this.doc?.name) {
