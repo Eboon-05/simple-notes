@@ -387,6 +387,10 @@ textarea {
   font-size: 18px;
 }
 
+textarea:disabled {
+  border-color: dimgray;
+}
+
 /* Media Queries
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 /*
