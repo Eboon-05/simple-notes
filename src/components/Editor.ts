@@ -34,6 +34,10 @@ export class Editor extends connect(store)(LitElement) {
             #writer {
                 color: white;
             }
+
+            #doc-title {
+                margin: 0;
+            }
         `
     ]
 
@@ -63,7 +67,9 @@ export class Editor extends connect(store)(LitElement) {
                 </select>
             </div>
             <div id="writer" class="row">
-                <h1>${this.doc?.name}</h1>
+                <h1 id="doc-title">
+                    ${this.doc?.name}
+                </h1>
                 <textarea
                 ?disabled=${this.disabled}
                 @input=${this.input}
