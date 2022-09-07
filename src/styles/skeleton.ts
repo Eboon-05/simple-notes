@@ -388,8 +388,10 @@ textarea {
   font-size: 18px;
 }
 
-textarea:disabled {
+textarea:disabled, 
+select:disabled, select:hover {
   border-color: dimgray;
+  cursor: default;
 }
 
 /* Media Queries
