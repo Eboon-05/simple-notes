@@ -100,7 +100,7 @@ export class Editor extends connect(store)(LitElement) {
         if (state.doc) {
             if (state.doc?.name !== this.doc?.name) {
                 this.doc = state.doc
-                this.textEl.value = state.doc.content
+                this.textEl !== null && (this.textEl.value = state.doc.content)
                 this.disabled = false
             }
         }
