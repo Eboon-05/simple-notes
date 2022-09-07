@@ -369,18 +369,19 @@ hr {
 /* My styles
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
-button, button:hover, button:focus {
+button, button:hover, button:focus,
+.button, .button:hover, .button:focus {
     color: rgb(200, 195, 188);
 }
 
-button:focus {
+button:focus, .button:focus {
     outline: rgba(200, 200, 200, .3) 2px solid;
 }
 
 textarea {
   color: white;
   background-color: transparent;
-  height: 100%;
+  height: calc(100% - 60px);
   font-family: monospace;
   resize: none;
   margin: 0;
