@@ -9,8 +9,8 @@ export interface State {
 }
 
 export interface Action {
-    type: 'INPUT' | 'SET_DOC' | 'ADD_DOC',
-    payload?: string
+    type: 'INPUT' | 'SET_DOC' | 'ADD_DOC' | 'SAVE_DOC',
+    payload?: string | Doc
 }
 
 export interface Doc {
@@ -38,6 +38,10 @@ function getInitialDocument () {
     }
 }
 
+function isDoc(data: any): data is Doc {
+    return ('name' in data && 'content' in data)
+}
+
 const initialState = {
     doc: getInitialDocument(),
     collection: JSON.parse(localStorage.getItem('collection') as string) // Can't be undefined
@@ -47,8 +51,22 @@ export const reducer: Reducer<State, Action> = (state = initialState, action): S
     switch (action.type) {
         case 'INPUT':
             if (typeof action.payload !== "string") return state
+            if (!state.doc) return state
+
+            const i = state.collection.findIndex(doc => doc.name === state.doc?.name)
+            if (i === -1) return state
+
+            const newColl = [...state.collection]
+            newColl[i] = {
+                name: state.doc.name,
+                content: action.payload
+            }
+
+            localStorage.setItem('collection', JSON.stringify(newColl))
+
             return {
                 ...state,
+                collection: newColl
             }
         case 'SET_DOC':
             if (typeof action.payload !== "number") return state
@@ -66,7 +84,7 @@ export const reducer: Reducer<State, Action> = (state = initialState, action): S
                 return state                
             }
 
-            const newColl = [
+            const newColl2 = [
                 ...state.collection,
                 {
                     name: action.payload,
@@ -74,12 +92,23 @@ export const reducer: Reducer<State, Action> = (state = initialState, action): S
                 }
             ]
 
-            localStorage.setItem('collection', JSON.stringify(newColl))
+            localStorage.setItem('collection', JSON.stringify(newColl2))
 
             return {
                 ...state,
-                collection: newColl,
-                doc: newColl[newColl.length - 1]
+                collection: newColl2,
+                doc: newColl2[newColl2.length - 1]
+            }
+        case 'SAVE_DOC':
+            if (!isDoc(action.payload)) {
+                console.error(`action.payload is not a Doc`)                
+                return state
+            }
+            
+
+
+            return {
+                ...state
             }
         default:
             return state
