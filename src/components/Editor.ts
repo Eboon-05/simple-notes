@@ -87,7 +87,7 @@ export class Editor extends connect(store)(LitElement) {
     createDoc() {
         store.dispatch({
             type: 'ADD_DOC',
-            payload: `Untitled${this.collection}`,
+            payload: `Untitled${this.collection.length}`,
         })
     }
 
