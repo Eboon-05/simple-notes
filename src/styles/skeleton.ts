@@ -389,9 +389,11 @@ textarea {
 }
 
 textarea:disabled, 
+button:disabled, 
 select:disabled, select:hover {
   border-color: dimgray;
   cursor: default;
+  color: rgb(51, 51, 51);
 }
 
 /* Media Queries
