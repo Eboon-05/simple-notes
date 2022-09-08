@@ -59,17 +59,21 @@ export class Editor extends connect(store)(LitElement) {
         <div class="container u-full-width">
             <div id="actions" class="row">
                 <button class="button-primary" @click=${this.createDoc}>Create document</button>
-                <button @click=${this.erase}>Erase</button>
-                <select @input=${this.changeDoc} class="button">
+
+                <button @click=${this.erase} ?disabled=${this.disabled}>Delete</button>
+
+                <select @input=${this.changeDoc} class="button" ?disabled=${this.disabled}>
                     ${this.collection.map(doc => {
                         return html`<option value=${doc.name}>${doc.name}</option>`
                     })}
                 </select>
             </div>
             <div id="writer" class="row">
-                <h1 id="doc-title">
-                    ${this.doc?.name}
-                </h1>
+
+                ${this.doc !== null ? html`<h1 id="doc-title">
+                    ${this.doc.name}
+                </h1>` : ''}
+
                 <textarea
                 ?disabled=${this.disabled}
                 @input=${this.input}
@@ -81,7 +85,9 @@ export class Editor extends connect(store)(LitElement) {
     }
 
     erase() {
-        this.textEl.value = ''
+        store.dispatch({
+            type: 'DELETE_DOC',
+        })
     }
 
     createDoc() {
@@ -120,10 +126,25 @@ export class Editor extends connect(store)(LitElement) {
 
         if (state.doc) {
             if (state.doc?.name !== this.doc?.name) {
-                this.doc = state.doc
-                this.textEl !== null && (this.textEl.value = state.doc.content)
+                // Enable inputs
                 this.disabled = false
+
+                // Update properties based on state
+                this.doc = state.doc
+
+                // Update textarea value based on state document
+                this.textEl !== null && (this.textEl.value = state.doc.content)
             }
+        } else {
+            // Disable inputs
+            this.disabled = true
+
+            // Update properties based on state
+            this.doc && (this.doc = state.doc)
+            this.collection = state.collection
+
+            // Clear the textarea
+            this.textEl !== null && (this.textEl.value = '')
         }
     }
 }

@@ -9,7 +9,7 @@ export interface State {
 }
 
 export interface Action {
-    type: 'INPUT' | 'SET_DOC' | 'ADD_DOC' | 'SAVE_DOC',
+    type: 'INPUT' | 'SET_DOC' | 'ADD_DOC' | 'DELETE_DOC',
     payload?: string | Doc
 }
 
@@ -38,8 +38,13 @@ function getInitialDocument () {
     }
 }
 
-function isDoc(data: any): data is Doc {
-    return ('name' in data && 'content' in data)
+// Will be useful some day
+// function isDoc(data: any): data is Doc {
+//     return ('name' in data && 'content' in data)
+// }
+
+function updateCollection(newColl: Doc[]) {
+    localStorage.setItem('collection', JSON.stringify(newColl))
 }
 
 const initialState = {
@@ -62,7 +67,7 @@ export const reducer: Reducer<State, Action> = (state = initialState, action): S
                 content: action.payload
             }
 
-            localStorage.setItem('collection', JSON.stringify(newColl))
+            updateCollection(newColl)
 
             return {
                 ...state,
@@ -92,23 +97,21 @@ export const reducer: Reducer<State, Action> = (state = initialState, action): S
                 }
             ]
 
-            localStorage.setItem('collection', JSON.stringify(newColl2))
+            updateCollection(newColl2)
 
             return {
                 ...state,
                 collection: newColl2,
                 doc: newColl2[newColl2.length - 1]
             }
-        case 'SAVE_DOC':
-            if (!isDoc(action.payload)) {
-                console.error(`action.payload is not a Doc`)                
-                return state
-            }
-            
-
-
+        case 'DELETE_DOC':
+            const newColl3 = state.collection.filter(doc => doc.name !== state.doc?.name)
+            updateCollection(newColl3)
             return {
-                ...state
+                ...state,
+                collection: newColl3,
+                // If the new collection is empty, send null, else, send the first doc in it
+                doc: newColl3.length > 0 ? newColl3[0] : null
             }
         default:
             return state
