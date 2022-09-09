@@ -3,7 +3,6 @@ import { customElement } from 'lit/decorators.js'
 import { connect } from 'pwa-helpers'
 
 // Redux
-import { State } from './redux/reducer'
 import { store } from './redux/store'
 import { normalize } from './styles/normalize'
 import { skeleton } from './styles/skeleton'

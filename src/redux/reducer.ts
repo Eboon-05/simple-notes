@@ -1,4 +1,4 @@
-import { Reducer } from "redux"
+import { Reducer } from 'redux'
 
 export interface State {
     doc: {
@@ -10,7 +10,7 @@ export interface State {
 
 export interface Action {
     type: 'INPUT' | 'SET_DOC' | 'ADD_DOC' | 'DELETE_DOC',
-    payload?: string | Doc
+    payload?: string | Doc | number
 }
 
 export interface Doc {
@@ -33,7 +33,7 @@ function getInitialDocument () {
             return null
         }
     } else {
-        console.error(`This shouldn't happen`)
+        console.error('This shouldn\'t happen')
         return null
     }
 }
@@ -54,66 +54,69 @@ const initialState = {
 
 export const reducer: Reducer<State, Action> = (state = initialState, action): State => {
     switch (action.type) {
-        case 'INPUT':
-            if (typeof action.payload !== "string") return state
-            if (!state.doc) return state
+    case 'INPUT': {
+        if (typeof action.payload !== 'string') return state
+        if (!state.doc) return state
 
-            const i = state.collection.findIndex(doc => doc.name === state.doc?.name)
-            if (i === -1) return state
+        const i = state.collection.findIndex(doc => doc.name === state.doc?.name)
+        if (i === -1) return state
 
-            const newColl = [...state.collection]
-            newColl[i] = {
-                name: state.doc.name,
-                content: action.payload
+        const newColl = [...state.collection]
+        newColl[i] = {
+            name: state.doc.name,
+            content: action.payload
+        }
+
+        updateCollection(newColl)
+
+        return {
+            ...state,
+            collection: newColl
+        }
+    }
+    case 'SET_DOC':
+        if (typeof action.payload !== 'number') return state
+        return {
+            ...state,
+            doc: state.collection[action.payload] || state.collection[0]
+        }
+    case 'ADD_DOC': {
+        if (typeof action.payload !== 'string') return state
+
+        const filtered = state.collection.filter(doc => doc.name === action.payload)
+
+        if (filtered.length > 0) {
+            console.error(`Document "${action.payload}" already exists.`)
+            return state                
+        }
+
+        const newColl = [
+            ...state.collection,
+            {
+                name: action.payload,
+                content: ''
             }
+        ]
 
-            updateCollection(newColl)
+        updateCollection(newColl)
 
-            return {
-                ...state,
-                collection: newColl
-            }
-        case 'SET_DOC':
-            if (typeof action.payload !== "number") return state
-            return {
-                ...state,
-                doc: state.collection[action.payload] || state.collection[0]
-            }
-        case 'ADD_DOC':
-            if (typeof action.payload !== "string") return state
-
-            const filtered = state.collection.filter(doc => doc.name === action.payload)
-
-            if (filtered.length > 0) {
-                console.error(`Document "${action.payload}" already exists.`)
-                return state                
-            }
-
-            const newColl2 = [
-                ...state.collection,
-                {
-                    name: action.payload,
-                    content: ''
-                }
-            ]
-
-            updateCollection(newColl2)
-
-            return {
-                ...state,
-                collection: newColl2,
-                doc: newColl2[newColl2.length - 1]
-            }
-        case 'DELETE_DOC':
-            const newColl3 = state.collection.filter(doc => doc.name !== state.doc?.name)
-            updateCollection(newColl3)
-            return {
-                ...state,
-                collection: newColl3,
-                // If the new collection is empty, send null, else, send the first doc in it
-                doc: newColl3.length > 0 ? newColl3[0] : null
-            }
-        default:
-            return state
+        return {
+            ...state,
+            collection: newColl,
+            doc: newColl[newColl.length - 1]
+        }
+    }
+    case 'DELETE_DOC':{
+        const newColl = state.collection.filter(doc => doc.name !== state.doc?.name)
+        updateCollection(newColl)
+        return {
+            ...state,
+            collection: newColl,
+            // If the new collection is empty, send null, else, send the first doc in it
+            doc: newColl.length > 0 ? newColl[0] : null
+        }
+    }
+    default:
+        return state
     }
 }

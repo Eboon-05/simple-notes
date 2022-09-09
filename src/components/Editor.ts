@@ -1,13 +1,13 @@
-import { css, html, LitElement } from 'lit';
+import { css, html, LitElement } from 'lit'
 import { customElement, property, query } from 'lit/decorators.js'
-import { connect } from 'pwa-helpers';
+import { connect } from 'pwa-helpers'
 
 // Styles
-import { normalize } from '../styles/normalize';
-import { skeleton } from '../styles/skeleton';
+import { normalize } from '../styles/normalize'
+import { skeleton } from '../styles/skeleton'
 
-import { store } from '../redux/store';
-import { Doc, State } from '../redux/reducer';
+import { store } from '../redux/store'
+import { Doc, State } from '../redux/reducer'
 
 @customElement('md-editor')
 export class Editor extends connect(store)(LitElement) {
@@ -42,17 +42,19 @@ export class Editor extends connect(store)(LitElement) {
     ]
 
     @query('textarea')
-    textEl!: HTMLTextAreaElement
+        textEl!: HTMLTextAreaElement
 
     @query('select')
-    select!: HTMLSelectElement
+        select!: HTMLSelectElement
 
     @property()
-    disabled = true
+        disabled = true
 
     @property()
-    doc: Doc | null = null
-    collection: Doc[] = []
+        doc: Doc | null = null
+
+    @property()
+        collection: Doc[] = []
 
     render() {
         return html`
@@ -64,8 +66,8 @@ export class Editor extends connect(store)(LitElement) {
 
                 <select @input=${this.changeDoc} class="button" ?disabled=${this.disabled}>
                     ${this.collection.map(doc => {
-                        return html`<option value=${doc.name}>${doc.name}</option>`
-                    })}
+        return html`<option value=${doc.name}>${doc.name}</option>`
+    })}
                 </select>
             </div>
             <div id="writer" class="row">
@@ -113,7 +115,7 @@ export class Editor extends connect(store)(LitElement) {
 
     firstUpdated() {
         const state = store.getState()
-        
+
         if (state.doc) {
             this.doc = state.doc
             this.textEl.value = state.doc.content
