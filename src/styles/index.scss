@@ -1,3 +1,10 @@
+@use './fonts.scss';
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Raleway', sans-serif;
+    font-weight: normal;
+}
+
 button, button:hover, button:focus,
 .button, .button:hover, .button:focus {
     color: rgb(200, 195, 188);
@@ -11,7 +18,7 @@ textarea {
   color: white;
   background-color: transparent;
   height: calc(100% - 60px);
-  font-family: monospace;
+  font-family: 'DM Mono', monospace;
   resize: none;
   margin: 0;
   font-size: 18px;
