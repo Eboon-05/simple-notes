@@ -1,5 +1,5 @@
 import { html, LitElement } from 'lit'
-import { customElement, property, query } from 'lit/decorators.js'
+import { customElement, query, state } from 'lit/decorators.js'
 import { connect } from 'pwa-helpers'
 
 // Styles
@@ -8,6 +8,9 @@ import { globalStyles } from '../styles/globalStyles'
 // Redux
 import { store } from '../redux/store'
 import { Doc, State } from '../redux/reducer'
+
+// Modal class
+import { Modal } from './Modal'
 
 @customElement('md-editor')
 export class Editor extends connect(store)(LitElement) {
@@ -21,27 +24,34 @@ export class Editor extends connect(store)(LitElement) {
     @query('select')
         select!: HTMLSelectElement
 
-    @property()
+    @query('my-modal')
+        modalEl!: Modal
+
+    @state()
         disabled = true
 
-    @property()
+    @state()
         doc: Doc | null = null
 
-    @property()
+    @state()
         collection: Doc[] = []
+
+    @state()
+        modalActive = false
 
     render() {
         return html`
         <div class="container u-full-width">
             <div id="actions" class="row">
-                <button class="button-primary" @click=${this.createDoc}>Create document</button>
+                <!-- Set modal active = true -->
+                <button class="button-primary" @click=${() => this.modalEl.active = true}>Create a new document</button>
 
+                <!-- Delete the opened document -->
                 <button @click=${this.erase} ?disabled=${this.disabled}>Delete</button>
 
+                <!-- Dropdown for moving between documents -->
                 <select @input=${this.changeDoc} class="button" ?disabled=${this.disabled}>
-                    ${this.collection.map(doc => {
-        return html`<option value=${doc.name}>${doc.name}</option>`
-    })}
+                    ${this.collection.map(doc => html`<option value=${doc.name}>${doc.name}</option>`)}
                 </select>
             </div>
             <div id="writer" class="row">
@@ -57,8 +67,8 @@ export class Editor extends connect(store)(LitElement) {
                 </textarea>
             </div>
         </div>
-
-        <my-modal></my-modal>
+        
+        <my-modal .onConfirm=${this.createDoc}></my-modal>
         `
     }
 
@@ -68,10 +78,10 @@ export class Editor extends connect(store)(LitElement) {
         })
     }
 
-    createDoc() {
+    createDoc(name: string) {
         store.dispatch({
             type: 'ADD_DOC',
-            payload: `Untitled${this.collection.length}`,
+            payload: name,
         })
     }
 

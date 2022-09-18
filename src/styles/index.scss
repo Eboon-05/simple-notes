@@ -32,6 +32,11 @@ select:disabled, select:hover {
   color: rgb(51, 51, 51);
 }
 
+input {
+    background-color: transparent !important;
+    font-family: 'DM Mono', monospace;
+}
+
 /* Editor styles */
 
 .container {
@@ -84,8 +89,34 @@ select:disabled, select:hover {
     border: white 2px solid;
     color: white;
 
-    min-width: 500px;
-    max-width: 800px;
+    border-radius: 4px;
+
+    width: 90%;
     margin: 0;
     padding: 15px;
+
+    form {
+        margin: 0;
+    }
 }
+
+// Responsive (skeleton breakpoints)
+
+/* Larger than mobile */
+@media (min-width: 400px) {}
+
+/* Larger than phablet (also point when grid becomes active) */
+@media (min-width: 550px) {
+    .modal-content {
+        width: 500px;
+    }
+}
+
+/* Larger than tablet */
+@media (min-width: 750px) {}
+
+/* Larger than desktop */
+@media (min-width: 1000px) {}
+
+/* Larger than Desktop HD */
+@media (min-width: 1200px) {}
