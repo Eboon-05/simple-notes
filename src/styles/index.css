@@ -1,0 +1,84 @@
+button, button:hover, button:focus,
+.button, .button:hover, .button:focus {
+    color: rgb(200, 195, 188);
+}
+
+button:focus, .button:focus {
+    outline: rgba(200, 200, 200, .3) 2px solid;
+}
+
+textarea {
+  color: white;
+  background-color: transparent;
+  height: calc(100% - 60px);
+  font-family: monospace;
+  resize: none;
+  margin: 0;
+  font-size: 18px;
+}
+
+textarea:disabled, 
+button:disabled, 
+select:disabled, select:hover {
+  border-color: dimgray;
+  cursor: default;
+  color: rgb(51, 51, 51);
+}
+
+/* Editor styles */
+
+.container {
+    padding: 10px;
+    height: 100vh;
+
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 100px 1fr;
+}
+
+#actions {
+    display: grid;
+    grid-template-columns: repeat(4, min-content);
+    grid-template-rows: repeat(2, 50%);
+    gap: 4px;
+}
+
+#writer {
+    color: white;
+}
+
+#doc-title {
+    margin: 0;
+}
+
+/* Modal styles */
+
+.modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    background-color: rgba(0, 0, 0, .1);
+    backdrop-filter: blur(4px);
+
+    display: none;
+}
+
+.modal.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #181a1b;
+    border: white 2px solid;
+    color: white;
+
+    min-width: 500px;
+    max-width: 800px;
+    margin: 0;
+    padding: 15px;
+}

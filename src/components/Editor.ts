@@ -1,44 +1,18 @@
-import { css, html, LitElement } from 'lit'
+import { html, LitElement } from 'lit'
 import { customElement, property, query } from 'lit/decorators.js'
 import { connect } from 'pwa-helpers'
 
 // Styles
-import { normalize } from '../styles/normalize'
-import { skeleton } from '../styles/skeleton'
+import { globalStyles } from '../styles/globalStyles'
 
+// Redux
 import { store } from '../redux/store'
 import { Doc, State } from '../redux/reducer'
 
 @customElement('md-editor')
 export class Editor extends connect(store)(LitElement) {
     static styles = [
-        normalize,
-        skeleton,
-        css`
-            .container {
-                padding: 10px;
-                height: 100vh;
-
-                display: grid;
-                grid-template-columns: 1fr;
-                grid-template-rows: 100px 1fr;
-            }
-
-            #actions {
-                display: grid;
-                grid-template-columns: repeat(4, min-content);
-                grid-template-rows: repeat(2, 50%);
-                gap: 4px;
-            }
-
-            #writer {
-                color: white;
-            }
-
-            #doc-title {
-                margin: 0;
-            }
-        `
+        globalStyles
     ]
 
     @query('textarea')

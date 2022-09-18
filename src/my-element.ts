@@ -9,10 +9,6 @@ import { store } from './redux/store'
 import './components/Editor'
 import './components/Modal'
 
-// Styles
-import { normalize } from './styles/normalize'
-import { skeleton } from './styles/skeleton'
-
 /**
  * An example element.
  *
@@ -22,8 +18,6 @@ import { skeleton } from './styles/skeleton'
 @customElement('my-element')
 export class ReduxMyElement extends connect(store)(LitElement) {
     static styles = [
-        normalize,
-        skeleton,
         css`
             #root {
                 min-height: 100vh;
