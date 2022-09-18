@@ -83,6 +83,8 @@ export class Editor extends connect(store)(LitElement) {
                 </textarea>
             </div>
         </div>
+
+        <my-modal></my-modal>
         `
     }
 

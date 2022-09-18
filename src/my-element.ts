@@ -4,6 +4,12 @@ import { connect } from 'pwa-helpers'
 
 // Redux
 import { store } from './redux/store'
+
+// Elements
+import './components/Editor'
+import './components/Modal'
+
+// Styles
 import { normalize } from './styles/normalize'
 import { skeleton } from './styles/skeleton'
 
