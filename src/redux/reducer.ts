@@ -6,6 +6,7 @@ export interface State {
         content: string,
     } | null,
     collection: Doc[],
+    error?: string
 }
 
 export interface Action {
@@ -86,8 +87,11 @@ export const reducer: Reducer<State, Action> = (state = initialState, action): S
         const filtered = state.collection.filter(doc => doc.name === action.payload)
 
         if (filtered.length > 0) {
-            console.error(`Document "${action.payload}" already exists.`)
-            return state                
+            console.error(`Document "${action.payload}" already exists.`)            
+            return {
+                ...state,
+                error: `Document "${action.payload}" already exists.`
+            }
         }
 
         const newColl = [
