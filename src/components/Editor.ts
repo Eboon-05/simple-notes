@@ -41,7 +41,7 @@ export class Editor extends connect(store)(LitElement) {
         <div class="container u-full-width">
             <div id="actions" class="row">
                 <!-- Set modal active = true -->
-                <button class="button-primary" @click=${() => this.modalEl.active = true}>Create a new document</button>
+                <button class="button-primary" @click=${() => this.modalEl.show()}>Create a new document</button>
 
                 <!-- Delete the opened document -->
                 <button @click=${this.erase} ?disabled=${this.disabled}>Delete</button>

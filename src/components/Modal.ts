@@ -1,5 +1,5 @@
 import { html, LitElement } from 'lit'
-import { customElement, property, query } from 'lit/decorators.js'
+import { customElement, property, query, state } from 'lit/decorators.js'
 
 // Styles
 import { globalStyles } from '../styles/globalStyles'
@@ -7,10 +7,13 @@ import { globalStyles } from '../styles/globalStyles'
 @customElement('my-modal')
 export class Modal extends LitElement {
     @property()
-        active = false
-    name = 'Name'
+        name = 'Name'
     onConfirm: (value: string) => void = () => console.warn('Modal was submitted, but nothing happens.')    
     onClose: () => void = () => { return null }
+    
+    @state()
+        active = false
+
 
     @query('input')
         textEl!: HTMLInputElement | null
@@ -37,6 +40,10 @@ export class Modal extends LitElement {
         this.active = false
         this.onConfirm(this.textEl.value)
         this.textEl.value = ''
+    }
+
+    show() {
+        this.active = true
     }
 
     static styles = [
