@@ -21,7 +21,7 @@ export class Modal extends LitElement {
     render() {
         return html`
             <div class=${`modal ${this.active ? 'active' : ''}`}>
-                <div class="modal-content">
+                <div class=${`modal-content animate__animated ${this.active ? 'animate__bounceIn' : ''}`}>
                     <form @submit=${this.onSubmit}>
                         <h3>Create a new document</h3>
                         <label for="name">${this.name}:</label>

@@ -16,7 +16,7 @@ export class Toast extends LitElement {
 
     render() {
         return html`
-        <div class=${`toast ${this.type === 'error' ? 'error' : ''} ${this.active ? 'active' : ''}`}>
+        <div class=${`toast animate__animated ${this.type === 'error' ? 'error' : ''} ${this.active ? 'active animate__slideInLeft' : ''}`}>
             <span>${this.message}</span>
             <button @click=${this.onClose} class="toast-close">X</button>
         </div>

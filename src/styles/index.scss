@@ -161,3 +161,10 @@ input {
 
 /* Larger than Desktop HD */
 @media (min-width: 1200px) {}
+
+
+// Animations
+
+.animate__animated.animate__slideInLeft {
+    --animate-duration: .5s;
+}
