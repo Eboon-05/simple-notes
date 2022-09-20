@@ -1,0 +1,38 @@
+.toast {
+    display: none;
+}
+
+.toast.active {
+    position: fixed;
+    top: calc(100vh - 68px);
+    right: 20px;
+    bottom: 20px;
+    left: 20px;
+
+    border-radius: 4px;
+    padding: 15px;
+
+    background-color: white;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .toast-close {
+        border: none;
+        padding: 0;
+        margin: auto 0;
+        height: 18px;
+        line-height: 18px;
+        color: black;
+    }
+}
+
+.toast.error {
+    background-color: lightcoral;
+    color: white;
+
+    .toast-close {
+        color: white;
+    }
+}

@@ -1,0 +1,23 @@
+.container {
+    padding: 10px;
+    height: 100vh;
+
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 100px 1fr;
+}
+
+#actions {
+    display: grid;
+    grid-template-columns: repeat(4, min-content);
+    grid-template-rows: repeat(2, 50%);
+    gap: 4px;
+}
+
+#writer {
+    color: white;
+}
+
+#doc-title {
+    margin: 0;
+}
