@@ -9,8 +9,9 @@ import { globalStyles } from '../styles/globalStyles'
 import { store } from '../redux/store'
 import { Doc, State } from '../redux/reducer'
 
-// Modal class
+// Elements classes
 import { Modal } from './Modal'
+import { Toast } from './Toast'
 
 @customElement('md-editor')
 export class Editor extends connect(store)(LitElement) {
@@ -27,17 +28,13 @@ export class Editor extends connect(store)(LitElement) {
     @query('my-modal')
         modalEl!: Modal
 
+    @query('my-toast')
+        toastEl!: Toast
+
     @state()
         disabled = true
-
-    @state()
-        doc: Doc | null = null
-
-    @state()
-        collection: Doc[] = []
-
-    @state()
-        modalActive = false
+    doc: Doc | null = null
+    collection: Doc[] = []
 
     render() {
         return html`
@@ -69,6 +66,7 @@ export class Editor extends connect(store)(LitElement) {
         </div>
         
         <my-modal .onConfirm=${this.createDoc}></my-modal>
+        <my-toast type="error"></my-toast>
         `
     }
 
@@ -112,7 +110,13 @@ export class Editor extends connect(store)(LitElement) {
     stateChanged(state: State): void {
         this.collection = state.collection
 
+        if (state.error) {
+            this.toastEl.show(state.error)
+        }
+
         if (state.doc) {
+            // If the opened document is different from state document
+            // change it
             if (state.doc?.name !== this.doc?.name) {
                 // Enable inputs
                 this.disabled = false

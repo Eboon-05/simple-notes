@@ -8,6 +8,7 @@ import { store } from './redux/store'
 // Elements
 import './components/Editor'
 import './components/Modal'
+import './components/Toast'
 
 /**
  * An example element.
