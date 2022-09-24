@@ -22,23 +22,32 @@ export class Modal extends LitElement {
         return html`
             <div class=${`modal ${this.active ? 'active' : ''}`}>
                 <div class=${`modal-content animate__animated ${this.active ? 'animate__bounceIn' : ''}`}>
-                    <form @submit=${this.onSubmit}>
+                    <form @submit=${this.submit}>
                         <h3>Create a new document</h3>
                         <label for="name">${this.name}:</label>
                         <input  class="u-full-width" type="text" id="name" name="doc-name" required autocomplete="off" autofocus />
                         <button type="submit" class="button-primary">Create</button>
+                        <button type="button" @click=${this.cancel}>Cancel</button>
                     </form>
                 </div>
             </div>
         `
     }
 
-    onSubmit(event: SubmitEvent) {
+    submit(event: SubmitEvent) {
         event.preventDefault()
         if (!this.textEl) return console.error('There is no textEl')
         
         this.active = false
-        this.onConfirm(this.textEl.value)
+        this.dispatchEvent(new CustomEvent('modal-confirm', { detail: this.textEl.value }))
+        this.textEl.value = ''
+    }
+    
+    cancel() {
+        if (!this.textEl) return console.error('There is no textEl')
+
+        this.active = false
+        this.dispatchEvent(new CustomEvent('modal-cancel'))
         this.textEl.value = ''
     }
 

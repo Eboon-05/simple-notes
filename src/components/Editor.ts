@@ -33,8 +33,12 @@ export class Editor extends connect(store)(LitElement) {
 
     @state()
         disabled = true
-    doc: Doc | null = null
-    collection: Doc[] = []
+
+    @state()
+        doc: Doc | null = null
+    
+    @state()
+        collection: Doc[] = []
 
     render() {
         return html`
@@ -65,7 +69,7 @@ export class Editor extends connect(store)(LitElement) {
             </div>
         </div>
         
-        <my-modal .onConfirm=${this.createDoc}></my-modal>
+        <my-modal @modal-confirm=${this.createDoc}></my-modal>
         <my-toast @toast-close=${this.clearError} type="error"></my-toast>
         `
     }
@@ -76,10 +80,10 @@ export class Editor extends connect(store)(LitElement) {
         })
     }
 
-    createDoc(name: string) {
+    createDoc(ev: CustomEvent) {
         store.dispatch({
             type: 'ADD_DOC',
-            payload: name,
+            payload: ev.detail,
         })
     }
 
