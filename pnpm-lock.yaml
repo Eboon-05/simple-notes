@@ -13,6 +13,7 @@ specifiers:
   redux: ^4.2.0
   rollup-plugin-scss: ^3.0.0
   sass: ^1.54.9
+  travelerjs: ^1.0.2
   typescript: ^4.6.4
   vite: ^3.1.0
   vite-plugin-pwa: ^0.13.0
@@ -27,6 +28,7 @@ dependencies:
   lit: 2.3.1
   pwa-helpers: 0.9.1
   redux: 4.2.0
+  travelerjs: 1.0.2
 
 devDependencies:
   '@rollup/plugin-node-resolve': 14.1.0
@@ -3561,6 +3563,10 @@ packages:
     dependencies:
       punycode: 2.1.1
     dev: true
+
+  /travelerjs/1.0.2:
+    resolution: {integrity: sha512-VEExFyQraA9H2kgUXVVLyRpPmzd6aOhox+6dXW1t00TuYdka8rlKE4nIrp5vJOtK1hWURqLlY0mErG0Vo2JeDA==}
+    dev: false
 
   /tslib/1.14.1:
     resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==}
