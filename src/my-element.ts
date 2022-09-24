@@ -10,6 +10,8 @@ import './components/Editor'
 import './components/Modal'
 import './components/Toast'
 
+import './styles/index.scss'
+
 /**
  * An example element.
  *

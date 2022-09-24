@@ -1,3 +1,9 @@
+// CSS files
+// If imported from index.html, don't get minified
+@use './animate.min.css';
+@use './normalize.css';
+@use './skeleton.css';
+
 // Font styles
 @use './sass/fonts.scss';
 
