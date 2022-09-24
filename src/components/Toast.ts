@@ -25,10 +25,12 @@ export class Toast extends LitElement {
 
     onClose() {
         this.active = false
+        this.dispatchEvent(new CustomEvent('toast-close'))
     }
-
+    
     show(msg: string) {
         this.message = msg    
         this.active = true
+        this.dispatchEvent(new CustomEvent('toast-show'))
     }
 }

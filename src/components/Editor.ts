@@ -66,7 +66,7 @@ export class Editor extends connect(store)(LitElement) {
         </div>
         
         <my-modal .onConfirm=${this.createDoc}></my-modal>
-        <my-toast type="error"></my-toast>
+        <my-toast @toast-close=${this.clearError} type="error"></my-toast>
         `
     }
 
@@ -138,5 +138,11 @@ export class Editor extends connect(store)(LitElement) {
             // Clear the textarea
             this.textEl !== null && (this.textEl.value = '')
         }
+    }
+
+    clearError() {
+        store.dispatch({
+            type: 'CLEAR_ERROR'
+        })
     }
 }
