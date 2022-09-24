@@ -79,7 +79,7 @@ export const reducer: Reducer<State, Action> = (state = initialState, action): S
         if (typeof action.payload !== 'number') return state
         return {
             ...state,
-            doc: state.collection[action.payload] || state.collection[0]
+            doc: state.collection[action.payload] || state.collection[0] || null
         }
     case 'ADD_DOC': {
         if (typeof action.payload !== 'string') return state
