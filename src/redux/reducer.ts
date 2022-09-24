@@ -10,7 +10,7 @@ export interface State {
 }
 
 export interface Action {
-    type: 'INPUT' | 'SET_DOC' | 'ADD_DOC' | 'DELETE_DOC',
+    type: 'INPUT' | 'SET_DOC' | 'ADD_DOC' | 'DELETE_DOC' | 'CLEAR_ERROR',
     payload?: string | Doc | number
 }
 
@@ -120,6 +120,8 @@ export const reducer: Reducer<State, Action> = (state = initialState, action): S
             doc: newColl.length > 0 ? newColl[0] : null
         }
     }
+    case 'CLEAR_ERROR':
+        return { ...state, error: undefined }
     default:
         return state
     }
