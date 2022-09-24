@@ -11,7 +11,7 @@ export default defineConfig(({ mode }) => {
     return {
         build: {
             lib: {
-                entry: 'src/my-element.ts',
+                entry: 'src/notes-router.ts',
                 formats: ['es']
             },
             rollupOptions: {
