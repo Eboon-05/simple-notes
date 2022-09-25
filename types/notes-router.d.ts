@@ -4,6 +4,7 @@ import './routes/notes-home';
 import './routes/notes-editor';
 import './components/Modal';
 import './components/Toast';
+import './components/notes-footer';
 import './styles/index.scss';
 export declare const traveler: Traveler;
 declare const NotesRouter_base: (new (...args: any[]) => {
