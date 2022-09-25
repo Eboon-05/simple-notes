@@ -22,10 +22,13 @@ export default defineConfig(({ mode }) => {
                         injectServiceWorker: true,
                         serviceWorkerPath: 'sw.js',
                         transformHtml: html => {
-                            return html.replace('index.scss', 'style.css').replace('</head>' , `
-                            <link rel="manifest" href="manifest.webmanifest">
-                            </head>
-                            `)
+                            return html
+                                .replace('index.scss', 'style.css')
+                                .replace('</head>' , `
+                                <link rel="manifest" href="manifest.webmanifest">
+                                </head>
+                                `)
+                                .replace('public/', '')
                         },
                         minify: true
                     }),
@@ -42,6 +45,16 @@ export default defineConfig(({ mode }) => {
                     name:'Simple Notes',
                     short_name: 'Notes',
                     description: 'Simple and lightweight notes taker.',
+                    start_url: '/',
+                    theme_color: '#181a1b',
+                    icons: [
+                        {
+                            src: 'maskable_icon_x512.png',
+                            sizes: '512x512',
+                            type: 'image/png',
+                            purpose: 'any maskable'
+                        }
+                    ]
                 },
                 strategies: 'injectManifest'
             })
