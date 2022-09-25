@@ -110,8 +110,10 @@ export const reducer: Reducer<State, Action> = (state = initialState, action): S
             doc: newColl[newColl.length - 1]
         }
     }
-    case 'DELETE_DOC':{
-        const newColl = state.collection.filter(doc => doc.name !== state.doc?.name)
+    case 'DELETE_DOC': {
+        if (typeof action.payload !== 'number') return state
+        const newColl = [...state.collection]
+        newColl.splice(action.payload, 1)
         updateCollection(newColl)
         return {
             ...state,
