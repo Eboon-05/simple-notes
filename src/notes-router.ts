@@ -13,6 +13,7 @@ import './routes/notes-editor'
 
 import './components/Modal'
 import './components/Toast'
+import './components/notes-footer'
 
 import './styles/index.scss'
 
@@ -41,6 +42,7 @@ export class NotesRouter extends connect(store)(LitElement) {
     render() {
         return html`
             ${this.content}
+            <notes-footer></notes-footer>
         `
     }
 

@@ -7,11 +7,15 @@
 // Font styles
 @use './sass/fonts.scss';
 
+// Variables
+// @use './sass/vars.scss';
+
 // LitElements styles
 @use './sass/modal.scss';
 @use './sass/editor.scss';
 @use './sass/toast.scss';
 @use './sass/home.scss';
+@use './sass/footer.scss';
 
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Raleway', sans-serif;
