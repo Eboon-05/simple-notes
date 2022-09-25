@@ -16,6 +16,10 @@
 
 #writer {
     color: white;
+
+    textarea {
+        max-width: calc(100vw - 20px);
+    }
 }
 
 #doc-title {
