@@ -1,0 +1,68 @@
+#notes-home {
+    gap: 15px;
+    grid-template-rows: min-content min-content 1fr;
+
+    .doc-row {
+        background-color: rgba($color: #818181, $alpha: .1);
+        margin-bottom: 10px;
+
+        min-height: 150px;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: column;
+
+        padding-top: 10px;
+
+        :first-child {
+            text-align: center;
+        }
+
+        .column {
+            height: 100%;
+            border-radius: 4px;
+            
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+            h3 {
+                margin: 0;
+            }
+
+            button {
+                margin: 0;
+                width: 100%;
+            }
+        }
+        
+        .column.buttons {
+            display: grid;
+            grid-template-rows: 1fr 1fr;
+            padding: 5px;
+            gap: 5px;
+        }
+
+    }
+
+    #home-info {
+        text-align: center;
+    }
+}
+
+@media (min-width: 550px) {
+    #notes-home {
+        .doc-row {
+            flex-direction: row;
+            
+        }
+        
+        #home-info {
+            text-align: left;
+            :last-child {
+                text-align: right;
+            }
+        }
+    }
+}
