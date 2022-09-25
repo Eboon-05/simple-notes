@@ -4,6 +4,18 @@
     gap: 15px;
     grid-template-rows: min-content min-content 1fr;
 
+    #header {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+
+        img {
+            height: 60px;
+            margin-right: 5px;
+        }
+    }
+
     .doc-row {
         background-color: vars.$light-transparent-bg;
         margin-bottom: 10px;

@@ -5,9 +5,12 @@ import { connect } from 'pwa-helpers'
 import { store } from '../redux/store'
 
 import { globalStyles } from '../styles/globalStyles'
+
 import { traveler } from '../notes-router'
 
 import { Modal } from '../components/Modal'
+
+import icon from '../assets/icon.svg'
 
 @customElement('notes-home')
 export class NotesHome extends connect(store)(LitElement) {
@@ -23,12 +26,13 @@ export class NotesHome extends connect(store)(LitElement) {
     render() {
         return html`
             <div id="notes-home" class="container">
-                <div class="row">
+                <div id="header" class="row">
+                    <img src=${icon} />
                     <h1>Simple notes</h1>
                 </div>
                 <div class="row" id="home-info">
                     <div class="one-half column">
-                        <span>Choose a note, delete it or</span>
+                        <span>Dead simple and lightweight notes app.</span>
                     </div>
                     <div class="one-half column">
                         <button @click=${() => this.modalEl.show()}>Create a new note</button>
