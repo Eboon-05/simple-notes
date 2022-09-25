@@ -6,7 +6,8 @@ export declare class Modal extends LitElement {
     active: boolean;
     textEl: HTMLInputElement | null;
     render(): import("lit").TemplateResult<1>;
-    onSubmit(event: SubmitEvent): void;
+    submit(event: SubmitEvent): void;
+    cancel(): void;
     show(): void;
     static styles: import("lit").CSSResult[][];
 }

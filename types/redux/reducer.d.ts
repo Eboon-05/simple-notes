@@ -8,7 +8,7 @@ export interface State {
     error?: string;
 }
 export interface Action {
-    type: 'INPUT' | 'SET_DOC' | 'ADD_DOC' | 'DELETE_DOC';
+    type: 'INPUT' | 'SET_DOC' | 'ADD_DOC' | 'DELETE_DOC' | 'CLEAR_ERROR';
     payload?: string | Doc | number;
 }
 export interface Doc {
