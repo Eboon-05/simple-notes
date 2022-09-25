@@ -10,8 +10,8 @@ import { store } from '../redux/store'
 import { Doc, State } from '../redux/reducer'
 
 // Elements classes
-import { Modal } from './Modal'
-import { Toast } from './Toast'
+import { Modal } from '../components/Modal'
+import { Toast } from '../components/Toast'
 
 @customElement('md-editor')
 export class Editor extends connect(store)(LitElement) {

@@ -9,8 +9,8 @@ import { store } from './redux/store'
 
 // Elements
 import './routes/Home'
+import './routes/Editor'
 
-import './components/Editor'
 import './components/Modal'
 import './components/Toast'
 
