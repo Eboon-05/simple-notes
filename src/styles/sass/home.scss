@@ -1,9 +1,11 @@
+@use './vars.scss';
+
 #notes-home {
     gap: 15px;
     grid-template-rows: min-content min-content 1fr;
 
     .doc-row {
-        background-color: rgba($color: #818181, $alpha: .1);
+        background-color: vars.$light-transparent-bg;
         margin-bottom: 10px;
 
         min-height: 150px;
