@@ -16,6 +16,8 @@ import './components/Toast'
 
 import './styles/index.scss'
 
+export const traveler = new Traveler()
+
 /**
  * An example element.
  *
@@ -36,8 +38,6 @@ export class NotesRouter extends connect(store)(LitElement) {
     @state()
         content = html`<></>`
 
-    private traveler = new Traveler()
-
     render() {
         return html`
             ${this.content}
@@ -45,8 +45,6 @@ export class NotesRouter extends connect(store)(LitElement) {
     }
 
     firstUpdated() {
-        const { traveler } = this
-
         traveler.register(new Route('/', () => {
             this.content = html`<notes-home></notes-home>`
         }))
