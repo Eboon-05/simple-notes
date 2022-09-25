@@ -11,8 +11,8 @@ import { Doc, State } from '../redux/reducer'
 
 import { traveler } from '../notes-router'
 
-@customElement('md-editor')
-export class Editor extends connect(store)(LitElement) {
+@customElement('notes-editor')
+export class NotesEditor extends connect(store)(LitElement) {
     static styles = [
         globalStyles
     ]

@@ -8,8 +8,8 @@ import { Traveler, Route } from 'travelerjs'
 import { store } from './redux/store'
 
 // Elements
-import './routes/Home'
-import './routes/Editor'
+import './routes/notes-home'
+import './routes/notes-editor'
 
 import './components/Modal'
 import './components/Toast'
@@ -57,7 +57,7 @@ export class NotesRouter extends connect(store)(LitElement) {
                     type: 'SET_DOC',
                     payload: parseInt(id)
                 })
-                this.content = html`<md-editor></md-editor>`
+                this.content = html`<notes-editor></notes-editor>`
             } else {
                 traveler.go('/note/0')
             }
